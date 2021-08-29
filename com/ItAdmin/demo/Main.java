@@ -18,12 +18,13 @@ public class Main {
         Integer departmentNumber = input.nextInt();
 
         /* Create the parameterized Employee Object */
-        Employee employee = new Employee(firstName, lastName, departmentNumber);
+        Employee employee = new Employee(firstName, lastName);
 
         /* Create Object for Credential Services */
         CredentialService  credServ = new CredentialService();
 
         /* Calling the Method from Credential Service */
-        credServ.showCredentials(employee);
+        String CredentialDetails = credServ.showCredentials(employee, departmentNumber);
+        System.out.println(CredentialDetails);
     }
 }

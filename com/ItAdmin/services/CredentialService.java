@@ -4,28 +4,32 @@ import com.ItAdmin.beans.Employee;
 import java.util.Random;
 
 public class CredentialService {
+
+
      public String generatePassword(){
           Random rand = new Random();
-          System.out.println(rand.nextInt(1000));
-          int firstUppercaseIndex = (int)'A'; // for uppercase
-          int firstLowercaseIndex = (int)'a'; // for lowercase
-          int letterIndex =rand.nextInt(26); // random number between 0 and 26
-          char randomLowercase = (char) (firstLowercaseIndex + letterIndex);
-          char randomUppercase = (char) (firstUppercaseIndex + letterIndex);
-          System.out.println(randomLowercase);
-          System.out.println(randomUppercase);
-
-          return "randomPassword"; //TODO
+          final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@£$%^&*";
+          StringBuilder sb = new StringBuilder();
+          for (int i = 0; i < 8; i++)
+          {
+               int randomIndex = rand.nextInt(chars.length());
+               sb.append(chars.charAt(randomIndex));
+          }
+          String finalPassword = sb.toString();
+          return finalPassword;
      }
 
-     public  String generateEmailAddress(Employee employee){
-          return employee.firstName+employee.lastName+"@"+employee.department+".abc.com";
+     public  String generateEmailAddress(Employee employee, int departmentNumber){
+          String[]departments = {"Tech", "Admin", "HR", "Legal"};
+          String department = departments[departmentNumber];
+          return employee.getFirstName() +employee.getLastName()+"@"+department+".abc.com";
      }
 
-     public void showCredentials(Employee employee){
-          System.out.println("Dear " +  employee.firstName + " your generated credential are as follows");
-          String email = generateEmailAddress(employee);
+     public String showCredentials(Employee employee, int departmentNumber){
+          String initialMessage = "Dear " +  employee.getFirstName() + " your generated credential are as follows";
+          String email = generateEmailAddress(employee, departmentNumber);
           String password = generatePassword();
-          System.out.println("Email --> " + email +"\n" + "Password --> " + password);
+          String emailAndPassword = "Email --> " + email +"\n" + "Password --> " + password;
+          return initialMessage + "\n" + emailAndPassword;
      }
 }
