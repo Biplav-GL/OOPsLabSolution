@@ -1,7 +1,5 @@
 package com.ItAdmin.services;
 import com.ItAdmin.beans.Employee;
-import org.apache.commons.text.CharacterPredicates;
-import org.apache.commons.text.RandomStringGenerator;
 
 import java.util.Random;
 
